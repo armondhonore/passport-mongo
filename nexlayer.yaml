@@ -1,0 +1,21 @@
+application:
+  name: fast-peak-passport-mongo
+  pods:
+    - name: app
+      image: "# filled by pipeline"
+      path: /
+      servicePorts:
+        - 3000
+      vars:
+        - key: NODE_ENV
+          value: production
+        - key: PORT
+          value: "3000"
+        - key: HOSTNAME
+          value: "0.0.0.0"
+        - key: MONGODB_URI
+          value: "mongodb://${mongodb:27017}/passport-mongo"
+    - name: mongodb
+      image: mirror.gcr.io/library/mongo:latest
+      servicePorts:
+        - 27017
